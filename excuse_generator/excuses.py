@@ -46,7 +46,9 @@ EXCUSES = {
 
 #functions
 def generate_excuse(category: str) ->str:
-    return random.choice(EXCUSES.get(category, ["Invalid category!"]))
+    if category in EXCUSES:
+        return random.choice(EXCUSES[category])
+    return "Invalid category. Use list_categories() to see all available categories."
 
 def random_excuse() -> str:
     category = random.choice(list(EXCUSES.keys()))
