@@ -42,6 +42,9 @@ EXCUSES = {
         "There was a merge conflict we havent caught yet.",
         "Looks like a version mismatch issue.",
     ],
+    "meeting_resp" : [
+        "I think it makes sense but we should dive deeper for clarification."
+    ],
 }
 
 #functions
@@ -49,6 +52,10 @@ def generate_excuse(category: str) ->str:
     if category in EXCUSES:
         return random.choice(EXCUSES[category])
     return "Invalid category. Use list_categories() to see all available categories."
+
+def meeting_responses() -> str:
+    return random.choice(EXCUSES["meeting_resp"])
+    
 
 def random_excuse() -> str:
     category = random.choice(list(EXCUSES.keys()))
