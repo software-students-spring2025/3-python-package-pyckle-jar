@@ -43,11 +43,24 @@ EXCUSES = {
         "Looks like a version mismatch issue.",
     ],
     "meeting_resp": {
-        "question": [
-            
+        "late_meeting": [
+            "Apologies for missing the start of the meeting. I was caught in another meeting.",
+            "I apologize for the delay, I forgot to feed my pet.",
         ],
-        "direction": [
-
+        "technical": [
+            "My webcam isn't working.",
+            "My wifi is cutting out right now. Sorry.",
+            "Sorry, I had my microphone configured incorrectly",
+            "I apologize, I had my speakers configured incorrectly so I could not hear you.",
+        ],
+        "clarification": [
+            "Can you repeat what you just said?",
+            "Sorry, could you repeat the last thing you just said.",
+            "I didn’t quite catch that last part, could you elaborate?"
+        ],
+        "availability" : [
+            "I have another meeting at that time, can we reschedule?",
+            "I have a conflict at that hour, would __ (hour) be okay for everyone?"
         ]
     }
 }
@@ -80,4 +93,9 @@ def add_custom_excuse(category: str, excuse: str):
         EXCUSES[category] = [excuse]
 
 def list_categories() -> list:
-    return list(EXCUSES.keys())
+    categories = list(EXCUSES.keys()) 
+    for category in categories.copy():
+        if isinstance(EXCUSES[category], dict):
+            internal_keys = [f"{category} -> {key}" for key in EXCUSES[category].keys()]
+            categories.extend(internal_keys)
+    return categories
