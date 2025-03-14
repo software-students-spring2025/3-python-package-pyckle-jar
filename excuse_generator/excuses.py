@@ -42,19 +42,46 @@ EXCUSES = {
         "There was a merge conflict we havent caught yet.",
         "Looks like a version mismatch issue.",
     ],
-    "meeting_resp" : [
-        "I think it makes sense but we should dive deeper for clarification."
-    ],
+    "meeting_resp": {
+        "late_meeting": [
+            "Apologies for missing the start of the meeting. I was caught in another meeting.",
+            "I apologize for the delay, I forgot to feed my pet.",
+        ],
+        "technical": [
+            "My webcam isn't working.",
+            "My wifi is cutting out right now. Sorry.",
+            "Sorry, I had my microphone configured incorrectly",
+            "I apologize, I had my speakers configured incorrectly so I could not hear you.",
+        ],
+        "clarification": [
+            "Can you repeat what you just said?",
+            "Sorry, could you repeat the last thing you just said.",
+            "I didn’t quite catch that last part, could you elaborate?"
+        ],
+        "availability" : [
+            "I have another meeting at that time, can we reschedule?",
+            "I have a conflict at that hour, would __ (hour) be okay for everyone?"
+        ]
+    }
 }
 
-#functions
-def generate_excuse(category: str) ->str:
-    if category in EXCUSES:
-        return random.choice(EXCUSES[category])
-    return "Invalid category. Use list_categories() to see all available categories."
+def generate_excuse(category: str, resp_type: str = None) -> str:
+    category = category.lower()
 
-def meeting_responses() -> str:
-    return random.choice(EXCUSES["meeting_resp"])
+    if category in EXCUSES:
+        if isinstance(EXCUSES[category], dict):
+            if resp_type:
+                resp_type = resp_type.lower() 
+                if resp_type in EXCUSES[category]:
+                    return random.choice(EXCUSES[category][resp_type])
+                else:
+                    return "Invalid response type. Please use 'question' or 'direction'."
+            else:
+                return f"The category '{category}' has subcategories. Please specify one (e.g., 'question' or 'direction')."
+        else:
+            return random.choice(EXCUSES[category])
+    
+    return "Invalid category. Use list_categories() to see all available categories."
     
 
 def random_excuse() -> str:
@@ -68,4 +95,20 @@ def add_custom_excuse(category: str, excuse: str):
         EXCUSES[category] = [excuse]
 
 def list_categories() -> list:
-    return list(EXCUSES.keys())
+    categories = list(EXCUSES.keys()) 
+    for category in categories.copy():
+        if isinstance(EXCUSES[category], dict):
+            internal_keys = [f"{category} -> {key}" for key in EXCUSES[category].keys()]
+            categories.extend(internal_keys)
+    return categories
+
+def help():
+    help_message = """
+    EXCUSE GENERATOR FOR SOFTWARE ENGINEERS
+    ---------------------------------------
+
+    1. generate_excuse(category: str, resp_type: None) -> str
+       - Generates a random excuse based on the specified category.
+       - Categories: "bug", "deadline", "PR", "meeting", "deployment"
+       - Example Usage: generate_excuse("bug") will generate a bug-related excuse.
+    """
