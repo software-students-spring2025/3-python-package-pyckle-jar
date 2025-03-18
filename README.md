@@ -10,6 +10,7 @@ excuse-generator is a fun and practical Python package that helps software engin
 
 1. generate_excuse(category:str)-> str
     - generates an excuse based on a specificed category (bug, deadline, PR, meeting, deploymeent)
+    - some categories have subcategories and will ask for a sub category parameter.
 2. random_excuse() -> str
     - generates a completely random excuse from all categories
 3. add_custom_excuse(category:str, excuse:str)
