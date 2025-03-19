@@ -41,21 +41,105 @@ EXCUSES = {
         "There was a merge conflict we havent caught yet.",
         "Looks like a version mismatch issue.",
     ],
+    "meeting_resp": {
+        "late_meeting": [
+            "Apologies for missing the start of the meeting. I was caught in another meeting.",
+            "I apologize for the delay, I forgot to feed my pet.",
+        ],
+        "technical": [
+            "My webcam isn't working.",
+            "My wifi is cutting out right now. Sorry.",
+            "Sorry, I had my microphone configured incorrectly",
+            "I apologize, I had my speakers configured incorrectly so I could not hear you.",
+        ],
+        "clarification": [
+            "Can you repeat what you just said?",
+            "Sorry, could you repeat the last thing you just said.",
+            "I didn’t quite catch that last part, could you elaborate?"
+        ],
+        "availability" : [
+            "I have another meeting at that time, can we reschedule?",
+            "I have a conflict at that hour, would __ (hour) be okay for everyone?"
+        ]
+    }
 }
 
-#functions
-def generate_excuse(category: str) ->str:
-    return random.choice(EXCUSES.get(category, ["Invalid category!"]))
+def generate_excuse(category: str, resp_type: str = None) -> str:
+    category = category.lower()
+
+    if category in EXCUSES:
+        data = EXCUSES[category]
+
+        if isinstance(data, dict):  # If category has subcategories
+            if resp_type:
+                resp_type = resp_type.lower()
+                if resp_type in data:
+                    return random.choice(data[resp_type])
+                return f"Invalid response type. Available types: {list(data.keys())}"
+            return f"The category '{category}' has subcategories: {list(data.keys())}. Please specify one."
+
+        return random.choice(data)  # Standard categories
+
+    return "Invalid category. Use list_categories() to see all available categories."
+
+
+def add_custom_excuse(category: str, excuse: str, resp_type: str = None):
+    category = category.lower()
+
+    if category in EXCUSES:
+        if isinstance(EXCUSES[category], dict):  # If it's a nested category
+            if resp_type and resp_type in EXCUSES[category]:
+                EXCUSES[category][resp_type].append(excuse)
+            elif resp_type:
+                EXCUSES[category][resp_type] = [excuse]  # Create new subcategory
+            else:
+                return f"'{category}' has subcategories: {list(EXCUSES[category].keys())}. Please specify one."
+        else:
+            EXCUSES[category].append(excuse)
+    else:
+        EXCUSES[category] = [excuse]
+
 
 def random_excuse() -> str:
     category = random.choice(list(EXCUSES.keys()))
     return generate_excuse(category)
 
-def add_custom_excuse(category: str, excuse: str):
-    if category in EXCUSES:
-        EXCUSES[category].append(excuse)
-    else:
-        EXCUSES[category] = [excuse]
 
 def list_categories() -> list:
-    return list(EXCUSES.keys())
+    categories = list(EXCUSES.keys()) 
+    for category in categories.copy():
+        if isinstance(EXCUSES[category], dict):
+            internal_keys = [f"{category} -> {key}" for key in EXCUSES[category].keys()]
+            categories.extend(internal_keys)
+    return categories
+
+def help():
+    help_message = """
+    EXCUSE GENERATOR FOR SOFTWARE ENGINEERS
+    ---------------------------------------
+
+    Commands:
+
+    1. generate_excuse(category: str, resp_type: str = None) -> str
+       - Generates a random excuse based on the specified category.
+       - Categories: "bug", "deadline", "PR", "meeting", "deployment", "meeting_resp"
+       - Some categories (like "meeting_resp") have subcategories.
+       - Example: generate_excuse("bug")
+       - Example: generate_excuse("meeting_resp", "technical")
+
+    2. random_excuse() -> str
+       - Returns a random excuse from any category.
+
+    3. add_custom_excuse(category: str, excuse: str, resp_type: str = None)
+       - Adds a new excuse to an existing category.
+       - If the category has subcategories, specify resp_type.
+       - Example: add_custom_excuse("meeting_resp", "Dog unplugged my router.", "technical")
+
+    4. list_categories() -> list
+       - Returns a list of available excuse categories and subcategories.
+
+    5. help()
+       - Displays this help message.
+
+    """
+    print(help_message)
