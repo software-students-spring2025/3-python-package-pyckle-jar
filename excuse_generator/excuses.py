@@ -28,7 +28,6 @@ EXCUSES = {
         "I need to refactor before merging.",
         "It was a small change, so I didn't push it yet.",
         "I'm in a merge conflict... with my own code.",
-        
     ],
     "meeting": [
         "I was on mute the whole time, whoops.",
