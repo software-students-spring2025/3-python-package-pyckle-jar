@@ -65,6 +65,7 @@ EXCUSES = {
 }
 
 def generate_excuse(category: str, resp_type: str = None) -> str:
+    '''Generates a random excuse based on category and resp_type if there is one.'''
     category = category.lower()
 
     if category in EXCUSES:
@@ -84,6 +85,7 @@ def generate_excuse(category: str, resp_type: str = None) -> str:
 
 
 def add_custom_excuse(category: str, excuse: str, resp_type: str = None):
+    '''Adds a custom excuse to either an existing category or creates a new category/subcategory when necessary.'''
     category = category.lower()
     if category in EXCUSES:
         if isinstance(EXCUSES[category], dict):
@@ -104,11 +106,13 @@ def add_custom_excuse(category: str, excuse: str, resp_type: str = None):
 
 
 def random_excuse() -> str:
+    '''Returns a random excuse from any category'''
     category = random.choice(list(EXCUSES.keys()))
     return generate_excuse(category)
 
 
 def list_categories() -> list:
+    '''Returns a list of available categories and their subcategories.'''
     categories = list(EXCUSES.keys()) 
     for category in categories.copy():
         if isinstance(EXCUSES[category], dict):
@@ -117,6 +121,7 @@ def list_categories() -> list:
     return categories
 
 def help():
+    '''Displays functions and their usages'''
     help_message = """
     EXCUSE GENERATOR FOR SOFTWARE ENGINEERS
     ---------------------------------------
