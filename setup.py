@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="excuse_generator",
-    version="1.0.1",
+    version="1.0.2",
     author="Pyckle Jar",
     description="A fun excuse generator for software engineers and devs",
     long_description=open("README.md").read(),
