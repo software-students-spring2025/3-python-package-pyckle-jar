@@ -15,14 +15,16 @@ EXCUSES = {
         "It's probably an edge case we didn't consider.",
         "Must be a caching issue :(",
         "I didn't break it, it was like that before.",
-
+        "It must be a race condition.",
+        "Have you tried turning it off and on again?"
     ],
     "deadline": [
         "We've underestimated the complexity of this project",
         "Testing took longer than expected.",
         "We had some last minute requirement changes.",
         "The deadline was an appoximation.",
-        "The timeline was more of a suggestion."
+        "The timeline was more of a suggestion.",
+        "We're waiting on another team's input before we can proceed."
     ],
     "PR": [
         "I was waiting for a review.",
@@ -32,26 +34,29 @@ EXCUSES = {
     ],
     "meeting": [
         "I was on mute the whole time, whoops.",
-        "My inertnet cut out.",
+        "My internet cut out.",
         "Sorry, time zones got confusing.",
-        "There was a power outage in my building."
-
+        "There was a power outage in my building.",
+        "I joined the wrong Zoom link.",
+        "I was waiting for the host to let me in."
     ],
     "deployment": [
         "It worked in my branch...",
         "There was a merge conflict we havent caught yet.",
         "Looks like a version mismatch issue.",
+        "The logs said everything was fine until it wasn't."
     ],
     "meeting_resp": {
         "late_meeting": [
             "Apologies for missing the start of the meeting. I was caught in another meeting.",
             "I apologize for the delay, I forgot to feed my pet.",
+            "I got an urgent call, sorry for the delay"
         ],
         "technical": [
             "My webcam isn't working.",
             "My wifi is cutting out right now. Sorry.",
             "Sorry, I had my microphone configured incorrectly",
-            "I apologize, I had my speakers configured incorrectly so I could not hear you.",
+            "I apologize, I had my speakers configured incorrectly so I could not hear you."
         ],
         "clarification": [
             "Can you repeat what you just said?",
@@ -66,7 +71,14 @@ EXCUSES = {
 }
 
 def generate_excuse(category: str, resp_type: str = None) -> str:
-    '''Generates a random excuse based on category and resp_type if there is one.'''
+    '''Generates a random excuse based on category and resp_type if there is one.
+        Args:
+            category (str): The category of excuse to generate (e.g. "bug", "deadline", etc.).
+            resp_type (str, optional): For categories that have subcategories (e.g. "meeting_resp").
+                If provided, an excuse is chosen from that subcategory.
+    
+        Returns:
+         str: A random excuse string from the specified category (and subcategory).'''
     category = category.lower()
 
     if category in EXCUSES:
@@ -86,7 +98,16 @@ def generate_excuse(category: str, resp_type: str = None) -> str:
 
 
 def add_custom_excuse(category: str, excuse: str, resp_type: str = None):
-    '''Adds a custom excuse to either an existing category or creates a new category/subcategory when necessary.'''
+    '''Adds a custom excuse to either an existing category or creates a new category/subcategory when necessary.
+    Args:
+        category (str): The excuse category to which you're adding a new excuse.
+        excuse (str): The text of the excuse you want to add.
+        resp_type (str, optional): If the category uses subcategories, specify which subcategory
+                                   this excuse belongs to.
+                                   
+    Returns:
+        None
+    '''
     category = category.lower()
     if category in EXCUSES:
         if isinstance(EXCUSES[category], dict):
@@ -113,7 +134,10 @@ def random_excuse() -> str:
 
 
 def list_categories() -> list:
-    '''Returns a list of available categories and their subcategories.'''
+    '''Returns a list of available categories and their subcategories.
+    Returns:
+        list: A list of categories or subcategories supported by the excuse generator.
+    '''
     categories = list(EXCUSES.keys()) 
     for category in categories.copy():
         if isinstance(EXCUSES[category], dict):

@@ -41,7 +41,7 @@ def test_add_custom_excuse():
     add_custom_excuse(category, new_excuse)
 
     # Ensure the new excuse is in the category
-    excuses = [generate_excuse(category) for _ in range(10)]
+    excuses = [generate_excuse(category) for _ in range(50)]
     assert new_excuse in excuses
 
 def test_add_custom_excuse_to_subcategory():
