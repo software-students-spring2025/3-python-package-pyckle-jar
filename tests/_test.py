@@ -1,4 +1,4 @@
-from excuse_generator.excuses import generate_excuse, random_excuse, add_custom_excuse, list_categories
+from excuse_generator.excuses import generate_excuse, random_excuse, add_custom_excuse, list_categories, EXCUSES
 
 def test_generate_excuse_valid_category():
     """Test that generate_excuse returns a valid excuse from a known category."""
@@ -23,6 +23,10 @@ def test_generate_excuse_invalid_subcategory():
     """Test that generate_excuse handles invalid subcategories properly."""
     excuse = generate_excuse("meeting_resp", "not_a_real_type")
     assert excuse.startswith("Invalid response type.")
+
+def test_generate_excuse_case_insensitive():
+    """Test that generate_excuse is case insensitive"""
+    assert generate_excuse("BuG") in EXCUSES["bug"]
 
 def test_random_excuse():
     """Test that random_excuse returns a valid excuse from any category."""
