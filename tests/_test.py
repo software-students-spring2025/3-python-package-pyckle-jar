@@ -62,4 +62,3 @@ def test_list_categories():
     assert len(categories) > 0
     assert "bug" in categories
     assert "meeting_resp -> technical" in categories  # Ensure nested categories appear
-
