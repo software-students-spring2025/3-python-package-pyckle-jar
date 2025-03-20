@@ -1,16 +1,12 @@
-# Python Package Exercise
-
-An exercise to create a Python package, build it, test it, distribute it, and use it. See [instructions](./instructions.md) for details.
-
-![Build Status](https://github.com/RayHuang3339/3-python-package-pyckle-jar/actions/workflows/python-package.yml/badge.svg)
-![Build Status](https://github.com/RayHuang3339/3-python-package-pyckle-jar/actions/workflows/event-logger.yml/badge.svg)
-
-
 ## Excuse Generator for Software Engineers
+
+![Build Status](https://github.com/software-students-spring2025/3-python-package-pyckle-jar/actions/workflows/python-package.yml/badge.svg)
+![Build Status](https://github.com/software-students-spring2025/3-python-package-pyckle-jar/actions/workflows/event-logger.yml/badge.svg)
 
 excuse-generator is a fun and practical Python package that helps software engineers come up with excuses for common coding problems. Whether you're dealing with bugs, missed deadlines, PR delays, failed deployments, or awkward meetings, this package has you covered!
 
 ## Table of Contents
+
 
 - [Installation](#installation)
 - [Usage](#usage)
