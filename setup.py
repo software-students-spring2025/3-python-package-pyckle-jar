@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="excuse_generator", 
-    version="1.0.0", 
+    name="excuse_generator",
+    version="1.0.1",
     author="Pyckle Jar",
     description="A fun excuse generator for software engineers and devs",
     long_description=open("README.md").read(),
@@ -18,7 +18,7 @@ setup(
     python_requires=">=3.6",
     entry_points={
         "console_scripts": [
-            "excuse-gen=excuse_generator..__main__:main",
+            "excuse-gen=excuse_generator.__main__:main",
         ]
     },
 )

@@ -4,11 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+excuse_generator = {path = ".", editable = true}
 pytest = "*"
 build = "*"
 twine = "*"
 
 [dev-packages]
+build = "*"
+twine = "*"
 
 [requires]
 python_version = "3.13"
