@@ -37,7 +37,7 @@ pipenv shell
 1. Install the package:
 
 ```bash
-pip install excuse-gnerator
+pip install excuse-generator
 ```
 
 ### Lastly, Start the code with:
