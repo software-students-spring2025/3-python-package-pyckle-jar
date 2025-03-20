@@ -85,19 +85,22 @@ def generate_excuse(category: str, resp_type: str = None) -> str:
 
 def add_custom_excuse(category: str, excuse: str, resp_type: str = None):
     category = category.lower()
-
     if category in EXCUSES:
-        if isinstance(EXCUSES[category], dict):  # If it's a nested category
-            if resp_type and resp_type in EXCUSES[category]:
+        if isinstance(EXCUSES[category], dict):
+            if resp_type:
+                if resp_type not in EXCUSES[category]:
+                    EXCUSES[category][resp_type] = []  
                 EXCUSES[category][resp_type].append(excuse)
-            elif resp_type:
-                EXCUSES[category][resp_type] = [excuse]  # Create new subcategory
             else:
                 return f"'{category}' has subcategories: {list(EXCUSES[category].keys())}. Please specify one."
         else:
             EXCUSES[category].append(excuse)
     else:
-        EXCUSES[category] = [excuse]
+        if resp_type:
+            EXCUSES[category] = {resp_type: [excuse]} 
+        else:
+            EXCUSES[category] = [excuse]
+
 
 
 def random_excuse() -> str:
