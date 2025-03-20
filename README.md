@@ -40,11 +40,6 @@ pipenv shell
 pip install excuse-gnerator
 ```
 
-### Lastly, Start the code with:
-```bash
-pipenv run python -m excuse_generator
-```
-
 ## Usage
 
 You can import the **excuse_genertator** module and start generating excuses! Here are a few examples of how to use the package:
@@ -101,12 +96,3 @@ It's a feature, not a bug.
        - Displays functions
 
 ## Authors
-
-- **Andrew Jung** ([AndrewJung03](https://github.com/AndrewJung03))
-- **Juno Cheung** ([avacheungx](https://github.com/avacheungx))
-- **Ray Huang** ([RayHuang3339](https://github.com/RayHuang3339))
-- - **Krish Kothari** ([krish-nyu](https://github.com/krish-nyu))
-
-
-
-
