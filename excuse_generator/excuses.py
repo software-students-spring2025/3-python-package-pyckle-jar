@@ -1,4 +1,5 @@
 import random
+random.seed(42)
 
 # excuse categories
 # "bug" – Excuses for why a bug exists.
