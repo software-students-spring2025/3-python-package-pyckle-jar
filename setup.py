@@ -18,7 +18,7 @@ setup(
     python_requires=">=3.6",
     entry_points={
         "console_scripts": [
-            "excuse-gen=excuse_generator.cli:main", 
+            "excuse-gen=excuse_generator..__main__:main",
         ]
     },
 )
