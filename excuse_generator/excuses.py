@@ -28,7 +28,6 @@ EXCUSES = {
         "I need to refactor before merging.",
         "It was a small change, so I didn't push it yet.",
         "I'm in a merge conflict... with my own code.",
-        
     ],
     "meeting": [
         "I was on mute the whole time, whoops.",
@@ -69,30 +68,42 @@ def generate_excuse(category: str, resp_type: str = None) -> str:
     category = category.lower()
 
     if category in EXCUSES:
-        if isinstance(EXCUSES[category], dict):
+        data = EXCUSES[category]
+
+        if isinstance(data, dict):  # If category has subcategories
             if resp_type:
-                resp_type = resp_type.lower() 
-                if resp_type in EXCUSES[category]:
-                    return random.choice(EXCUSES[category][resp_type])
-                else:
-                    return "Invalid response type. Please use 'question' or 'direction'."
-            else:
-                return f"The category '{category}' has subcategories. Please specify one (e.g., 'question' or 'direction')."
-        else:
-            return random.choice(EXCUSES[category])
-    
+                resp_type = resp_type.lower()
+                if resp_type in data:
+                    return random.choice(data[resp_type])
+                return f"Invalid response type. Available types: {list(data.keys())}"
+            return f"The category '{category}' has subcategories: {list(data.keys())}. Please specify one."
+
+        return random.choice(data)  # Standard categories
+
     return "Invalid category. Use list_categories() to see all available categories."
+
+
+def add_custom_excuse(category: str, excuse: str, resp_type: str = None):
+    category = category.lower()
+
+    if category in EXCUSES:
+        if isinstance(EXCUSES[category], dict):  # If it's a nested category
+            if resp_type and resp_type in EXCUSES[category]:
+                EXCUSES[category][resp_type].append(excuse)
+            elif resp_type:
+                EXCUSES[category][resp_type] = [excuse]  # Create new subcategory
+            else:
+                return f"'{category}' has subcategories: {list(EXCUSES[category].keys())}. Please specify one."
+        else:
+            EXCUSES[category].append(excuse)
+    else:
+        EXCUSES[category] = [excuse]
 
 
 def random_excuse() -> str:
     category = random.choice(list(EXCUSES.keys()))
     return generate_excuse(category)
 
-def add_custom_excuse(category: str, excuse: str):
-    if category in EXCUSES:
-        EXCUSES[category].append(excuse)
-    else:
-        EXCUSES[category] = [excuse]
 
 def list_categories() -> list:
     categories = list(EXCUSES.keys()) 
@@ -107,8 +118,28 @@ def help():
     EXCUSE GENERATOR FOR SOFTWARE ENGINEERS
     ---------------------------------------
 
-    1. generate_excuse(category: str, resp_type: None) -> str
+    Commands:
+
+    1. generate_excuse(category: str, resp_type: str = None) -> str
        - Generates a random excuse based on the specified category.
-       - Categories: "bug", "deadline", "PR", "meeting", "deployment"
-       - Example Usage: generate_excuse("bug") will generate a bug-related excuse.
+       - Categories: "bug", "deadline", "PR", "meeting", "deployment", "meeting_resp"
+       - Some categories (like "meeting_resp") have subcategories.
+       - Example: generate_excuse("bug")
+       - Example: generate_excuse("meeting_resp", "technical")
+
+    2. random_excuse() -> str
+       - Returns a random excuse from any category.
+
+    3. add_custom_excuse(category: str, excuse: str, resp_type: str = None)
+       - Adds a new excuse to an existing category.
+       - If the category has subcategories, specify resp_type.
+       - Example: add_custom_excuse("meeting_resp", "Dog unplugged my router.", "technical")
+
+    4. list_categories() -> list
+       - Returns a list of available excuse categories and subcategories.
+
+    5. help()
+       - Displays this help message.
+
     """
+    print(help_message)
