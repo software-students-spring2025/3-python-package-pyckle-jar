@@ -1,5 +1,5 @@
 import sys
-from excuse_generator import generate_excuse, random_excuse, list_categories
+from excuse_generator import generate_excuse, random_excuse, list_categories, help
 
 def main():
     print("Welcome to the Software Engineer Excuse Generator!")

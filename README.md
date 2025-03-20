@@ -77,6 +77,29 @@ It's a feature, not a bug.
 
 ```
 
+## Functions
+
+    1. generate_excuse(category: str, resp_type: str = None) -> str
+       - Generates a random excuse based on the specified category.
+       - Categories: "bug", "deadline", "PR", "meeting", "deployment", "meeting_resp"
+       - Some categories (like "meeting_resp") have subcategories.
+       - Example: generate_excuse("bug")
+       - Example: generate_excuse("meeting_resp", "technical")
+
+    2. random_excuse() -> str
+       - Returns a random excuse from any category.
+
+    3. add_custom_excuse(category: str, excuse: str, resp_type: str = None)
+       - Adds a new excuse to an existing category.
+       - If the category has subcategories, specify resp_type.
+       - Example: add_custom_excuse("meeting_resp", "Dog unplugged my router.", "technical")
+
+    4. list_categories() -> list
+       - Returns a list of available excuse categories and subcategories.
+
+    5. help()
+       - Displays functions
+
 ## Authors
 
 - **Andrew Jung** ([AndrewJung03](https://github.com/AndrewJung03))
