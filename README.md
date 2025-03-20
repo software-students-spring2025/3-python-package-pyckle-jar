@@ -2,8 +2,8 @@
 
 An exercise to create a Python package, build it, test it, distribute it, and use it. See [instructions](./instructions.md) for details.
 
-![Build Status](https://github.com/RayHuang3339/3-python-package-pyckle-jar/actions/workflows/python-package.yml/badge1.svg)
-![Build Status](https://github.com/RayHuang3339/3-python-package-pyckle-jar/actions/workflows/event-logger.yml/badge2.svg)
+![Build Status](https://github.com/RayHuang3339/3-python-package-pyckle-jar/actions/workflows/python-package.yml/badge.svg)
+![Build Status](https://github.com/RayHuang3339/3-python-package-pyckle-jar/actions/workflows/event-logger.yml/badge.svg)
 
 
 ## Excuse Generator for Software Engineers
