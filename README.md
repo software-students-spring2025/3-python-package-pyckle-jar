@@ -5,6 +5,9 @@
 
 excuse-generator is a fun and practical Python package that helps software engineers come up with excuses for common coding problems. Whether you're dealing with bugs, missed deadlines, PR delays, failed deployments, or awkward meetings, this package has you covered!
 
+## PYPI URI
+https://pypi.org/project/excuse-generator/1.0.2/
+
 ## Table of Contents
 
 
@@ -105,7 +108,7 @@ It's a feature, not a bug.
 - **Andrew Jung** ([AndrewJung03](https://github.com/AndrewJung03))
 - **Juno Cheung** ([avacheungx](https://github.com/avacheungx))
 - **Ray Huang** ([RayHuang3339](https://github.com/RayHuang3339))
-- - **Krish Kothari** ([krish-nyu](https://github.com/krish-nyu))
+- **Krish Kothari** ([krish-nyu](https://github.com/krish-nyu))
 
 
 
